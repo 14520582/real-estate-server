@@ -47,6 +47,21 @@ public class AuthenticationController {
         userService.update(user);
         return new ResponseEntity<Account>(user, HttpStatus.OK);
     }
-
+    
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseEntity<?> register(@RequestBody Account loginUser) throws AuthenticationException {
+        final Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginUser.getUsername(),
+                        loginUser.getPassword()
+                )
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        Account user = userService.findOne(loginUser.getUsername());
+        String token = jwtTokenUtil.generateToken(user);
+        user.setToken(token);
+        userService.update(user);
+        return new ResponseEntity<Account>(user, HttpStatus.OK);
+    }
 
 }
