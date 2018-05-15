@@ -9,4 +9,5 @@ public interface IAccountService {
      	boolean addAccount(Account account);
      	Account findOne(String username);
      	void update(Account acc);
+     	Account findByName(String name);
 }

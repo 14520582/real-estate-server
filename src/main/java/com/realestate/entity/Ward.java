@@ -1,4 +1,5 @@
 package com.realestate.entity;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -11,24 +12,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
-@Table(name="owner")
+@Table(name="ward")
 
 
-public class Owner implements Serializable  {
-	private static final long serialVersionUID = 3L;
+public class Ward implements Serializable {
+	
+	private static final long serialVersionUID = 4L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
-    private Integer id;  
+    private Integer id; 
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_district", nullable = false)
+	private District district;
+	
 	@Column(name="name")
     private String name;
-	@Column(name="address")
-    private String address;
-	@Column(name="phone")
-    private String phone;
 	
 	public Integer getId() {
 		return id;
@@ -36,25 +37,37 @@ public class Owner implements Serializable  {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public District getDistrict() {
+		return district;
+	}
+	public void setDistrict(District district) {
+		this.district = district;
+	}
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
+	
+	public Ward() {
+		super();
 	}
 	
-	public String getPhone() {
-		return phone;
+	public Ward(Integer id, District district, String name){
+		super();
+		this.id = id;
+		this.name = name;
+		this.district = district;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	
+	public Ward( District district, String name){
+		super();
+		this.name = name;
+		this.district = district;
 	}
+
 
 }

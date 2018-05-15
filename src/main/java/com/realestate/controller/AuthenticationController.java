@@ -2,6 +2,7 @@ package com.realestate.controller;
 
 import com.realestate.util.JWTTokenUtil;
 import com.realestate.entity.Account;
+
 import com.realestate.service.imp.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -63,5 +65,13 @@ public class AuthenticationController {
         userService.update(user);
         return new ResponseEntity<Account>(user, HttpStatus.OK);
     }
+    
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(method = RequestMethod.GET)
+	public Account getAccountByName(@RequestParam("name") String name) {
+		Account user = userService.findByName(name);
+		return user;
+	}
+
 
 }

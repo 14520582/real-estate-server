@@ -14,5 +14,7 @@ public interface AccountDAO extends CrudRepository<Account, Integer>{
       @Modifying
       @Query("update Account u set u.token = ?2 where u.username=?1")
       public void updateToken(String username, String token);
+      @Query("select u from Account u where u.name = ?1")
+      public Account findByName(String name);
 }
  

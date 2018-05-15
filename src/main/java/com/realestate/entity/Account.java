@@ -104,6 +104,17 @@ public class Account implements Serializable {
 		this.phone = phone;
 		this.role = role;
 	}
+	
+	public Account(String name, String username, String password, String address, String phone, String role) {
+		super();
+
+		this.name = name;
+		this.username = username;
+		this.password = password;
+		this.address = address;
+		this.phone = phone;
+		this.role = role;
+	}
 	public Account() {
 		super();
 	}
