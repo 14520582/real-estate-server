@@ -16,6 +16,9 @@ public interface NewsDAO extends CrudRepository<News, Integer>{
             "LOWER(t.category.name) LIKE LOWER(CONCAT('%',:category, '%')) OR " +
             "LOWER(t.category.label) LIKE LOWER(CONCAT('%',:category, '%'))")
       public Page<News> findBySearchTerm(@Param("category") String category, Pageable pageable);
+      
+      @Query(value="SELECT * FROM news ORDER BY views DESC LIMIT 10", nativeQuery = true)
+      public List<News> findMostView();
 //    public List<News> findAll();
 //    @Query("SELECT e FROM News e WHERE e.typeofnews.name = :nameType")
 //    public List<News> getNewsByType(@Param("nameType") String nameType);

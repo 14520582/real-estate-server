@@ -20,6 +20,12 @@ public class NewsService implements INewsService{
 		// TODO Auto-generated method stub
 		return newsDAO.findBySearchTerm(category, pageable);
 	}
+
+	@Override
+	public List<News> findMostView() {
+		// TODO Auto-generated method stub
+		return newsDAO.findMostView();
+	}
 	
 //	
 //	@Override

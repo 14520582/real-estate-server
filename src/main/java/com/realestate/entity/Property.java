@@ -42,6 +42,9 @@ public class Property implements Serializable {
 	@JoinColumn(name="id_address")	
 	private Address address;
 	
+	@Column(name="cover")
+	private String cover;
+	
 	@Column(name="numofbedroom")	
 	private int numofbedroom;	
 	
@@ -220,6 +223,22 @@ public class Property implements Serializable {
 		this.nameOfOwner = nameOfOwner;
 	}
 
+	public String getcover() {
+		return cover;
+	}
+
+	public void setcover(String cover) {
+		this.cover = cover;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -231,16 +250,17 @@ public class Property implements Serializable {
 	public Property() {
 		super();
 	}
-	
-	public Property(String title, int price, int form, int license, Address address, int numofbedroom,
+
+	public Property(String title, int price, int form, int license, Address address, String cover, int numofbedroom,
 			int numofbathroom, String phone, String nameOfOwner, String email, int numoffloor, String direction,
-			int type, float height, float width, float area, Account account) {
+			int type, float height, float width, float area, String description, Account account) {
 		super();
 		this.title = title;
 		this.price = price;
 		this.form = form;
 		this.license = license;
 		this.address = address;
+		this.cover = cover;
 		this.numofbedroom = numofbedroom;
 		this.numofbathroom = numofbathroom;
 		this.phone = phone;
@@ -252,12 +272,13 @@ public class Property implements Serializable {
 		this.height = height;
 		this.width = width;
 		this.area = area;
+		this.description = description;
 		this.account = account;
 	}
 
-	public Property(Integer id, String title, int price, int form, int license, Address address, int numofbedroom,
-			int numofbathroom, String phone, String nameOfOwner, String email, int numoffloor, String direction,
-			int type, float height, float width, float area, Account account) {
+	public Property(Integer id, String title, int price, int form, int license, Address address, String cover,
+			int numofbedroom, int numofbathroom, String phone, String nameOfOwner, String email, int numoffloor,
+			String direction, int type, float height, float width, float area, String description, Account account) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -265,6 +286,7 @@ public class Property implements Serializable {
 		this.form = form;
 		this.license = license;
 		this.address = address;
+		this.cover = cover;
 		this.numofbedroom = numofbedroom;
 		this.numofbathroom = numofbathroom;
 		this.phone = phone;
@@ -276,8 +298,10 @@ public class Property implements Serializable {
 		this.height = height;
 		this.width = width;
 		this.area = area;
+		this.description = description;
 		this.account = account;
 	}
-	
+
+
 	
 }

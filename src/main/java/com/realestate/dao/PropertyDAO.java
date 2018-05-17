@@ -13,6 +13,12 @@ public interface PropertyDAO  extends CrudRepository<Property, Integer>{
 	  public List<Property> getNewList(@Param("limit") int limit);
 	  
 	  public List<Property> findTop10ByOrderByIdDesc();
+
+	  @Query("SELECT u FROM Property u WHERE LOWER(u.address.district.name) = LOWER(:name)")
+	  public List<Property> findByDistrict(@Param("name") String name);
+	  
+	  @Query("SELECT u FROM Property u WHERE LOWER(u.address.district.name) = LOWER(:name) and u.form = :form")
+	  public List<Property> findByDistrictAndForm(@Param("name") String name, @Param("form") int form);
 //    @Query("select u from House u where u.subject like %?1%")
 //    public List<House> findBySubject(String subject);
 //    

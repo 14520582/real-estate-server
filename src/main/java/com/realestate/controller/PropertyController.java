@@ -54,6 +54,13 @@ public class PropertyController {
 	}
 	
 	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value= "/get/{name}/{form}", method = RequestMethod.GET)
+	public List<Property> findByID(@PathVariable("name") String name, @PathVariable("form") int form) {
+		List<Property> p= propertyService.findByDistrictAndForm(name, form);
+		return p;
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value= "/get/new", method = RequestMethod.GET)
 	public List<Property> getNewList(@RequestParam("limit") Integer limit) {
 		return propertyService.getNewList(limit);

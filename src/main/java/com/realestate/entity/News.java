@@ -37,8 +37,8 @@ public class News implements Serializable  {
 	@Column(name="content",length = 100000)
     private String content;
 	
-	@Column(name="thumnail")
-    private String thumnail;
+	@Column(name="thumbnail")
+    private String thumbnail;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_typeofnews", nullable = false)
@@ -46,6 +46,9 @@ public class News implements Serializable  {
 	
 	@Column(name="datecreated")
     private long datecreated;
+	
+	@Column(name="views")
+    private int views = 0;
 
 	public Integer getId() {
 		return id;
@@ -71,6 +74,14 @@ public class News implements Serializable  {
 		this.headline = headline;
 	}
 
+	public int getViews() {
+		return views;
+	}
+
+	public void setViews(int views) {
+		this.views = views;
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -79,12 +90,12 @@ public class News implements Serializable  {
 		this.content = content;
 	}
 
-	public String getThumnail() {
-		return thumnail;
+	public String getThumbnail() {
+		return thumbnail;
 	}
 
-	public void setThumnail(String thumnail) {
-		this.thumnail = thumnail;
+	public void setThumnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 
 	public TypeOfNews getCategory() {
@@ -103,30 +114,33 @@ public class News implements Serializable  {
 		this.datecreated = datecreated;
 	}
 
-	public News(String title, String headline, String content, String thumnail, TypeOfNews category, long datecreated) {
+	public News() {
 		super();
-		this.title = title;
-		this.headline = headline;
-		this.content = content;
-		this.thumnail = thumnail;
-		this.category = category;
-		this.datecreated = datecreated;
 	}
 
-	public News(Integer id, String title, String headline, String content, String thumnail, TypeOfNews category,
-			long datecreated) {
+	public News(Integer id, String title, String headline, String content, String thumbnail, TypeOfNews category,
+			long datecreated, int views) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.headline = headline;
 		this.content = content;
-		this.thumnail = thumnail;
+		this.thumbnail = thumbnail;
 		this.category = category;
 		this.datecreated = datecreated;
+		this.views = views;
 	}
 
-	public News() {
+	public News(String title, String headline, String content, String thumbnail, TypeOfNews category, long datecreated,
+			int views) {
 		super();
+		this.title = title;
+		this.headline = headline;
+		this.content = content;
+		this.thumbnail = thumbnail;
+		this.category = category;
+		this.datecreated = datecreated;
+		this.views = views;
 	}
 	
 

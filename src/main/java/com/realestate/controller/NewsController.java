@@ -25,6 +25,11 @@ public class NewsController {
     	Pageable pageable = new PageRequest(page, pageSize);
     	return newsService.findByPageAndCategory(category, pageable);
     }
+    
+    @RequestMapping(value = "/get/mostview", method = RequestMethod.GET)
+    public List<News> findMostView() {
+    	return newsService.findMostView();
+    }
 //	
 //	@ResponseStatus(HttpStatus.OK)
 //	@RequestMapping(value= "/all", method = RequestMethod.GET)

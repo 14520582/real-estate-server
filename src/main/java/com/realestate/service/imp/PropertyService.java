@@ -77,6 +77,15 @@ public class PropertyService implements IPropertyService{
 	public List<Property> getNewList(int limit) {
 		// TODO Auto-generated method stub
 		return propertyDAO.getNewList(limit);
+	}
+
+	@Override
+	public List<Property> findByDistrictAndForm(String name, int form) {
+		// TODO Auto-generated method stub
+		if(form != 0)
+			return propertyDAO.findByDistrictAndForm(name, form);
+		else
+			return propertyDAO.findByDistrict(name);
 	};
 
 }
