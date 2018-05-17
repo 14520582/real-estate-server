@@ -3,13 +3,16 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-//import org.springframework.data.repository.query.Param;
 import com.realestate.entity.Property;
 
 @Repository
 public interface PropertyDAO  extends CrudRepository<Property, Integer>{
-
+	  @Query(value = "SELECT * FROM property ORDER BY id DESC LIMIT :limit", nativeQuery = true)
+	  public List<Property> getNewList(@Param("limit") int limit);
+	  
+	  public List<Property> findTop10ByOrderByIdDesc();
 //    @Query("select u from House u where u.subject like %?1%")
 //    public List<House> findBySubject(String subject);
 //    
@@ -37,11 +40,8 @@ public interface PropertyDAO  extends CrudRepository<Property, Integer>{
 //    @Query("select u from House u where u.area between ?1 and ?2")
 //    public List<House> findByArea(Float minarea, Float maxarea );
 	
-      public List<Property> findAll();
-      @Query("select u from Property u where u.id like %?1%")
-      public Property findByID(Integer id);
+//      public List<Property> findAll();
+//      @Query("select u from Property u where u.id like %?1%")
+//      public Property findByID(Integer id);
     
-  
-    
-
 }

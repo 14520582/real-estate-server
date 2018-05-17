@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+
 import com.realestate.entity.Account;
 import com.realestate.entity.Property;
 import com.realestate.service.IAccountService;
+import com.realestate.service.IAddressService;
 import com.realestate.service.IPropertyService;
 
-import com.realestate.service.ITypeService;
 
 @RestController
 @RequestMapping("/property")
@@ -30,25 +31,45 @@ public class PropertyController {
 	
 	@Autowired
 	private IPropertyService propertyService;
-//	@Autowired
-//	private IAccountService accountService;
+	@Autowired
+	private IAccountService accountService;
+	@Autowired
+	private IAddressService addressService;
 //	@Autowired
 //	private ITypeService typeService;
 
 	
-
-	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value= "/all", method = RequestMethod.GET)
-	public List<Property> findAll() {
-		List<Property> list = propertyService.findAll();
-		return list;
+	@RequestMapping(value= "/add", method = RequestMethod.POST)
+	public Property addProperty(@RequestBody Property item) {
+		item.setAddress(addressService.addAddress(item.getAddress()));
+		Property newItem = propertyService.addProperty(item);
+        return newItem;
 	}
 	
 	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value= "/id={id}", method = RequestMethod.GET)
+	@RequestMapping(value= "/get/{id}", method = RequestMethod.GET)
 	public Property findByID(@PathVariable("id") Integer id) {
-		Property p= propertyService.findByID(id);
+		Property p= propertyService.findOne(id);
 		return p;
 	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value= "/get/new", method = RequestMethod.GET)
+	public List<Property> getNewList(@RequestParam("limit") Integer limit) {
+		return propertyService.getNewList(limit);
+	}
+//	@ResponseStatus(HttpStatus.OK)
+//	@RequestMapping(value= "/all", method = RequestMethod.GET)
+//	public List<Property> findAll() {
+//		List<Property> list = propertyService.findAll();
+//		return list;
+//	}
+//	
+//	@ResponseStatus(HttpStatus.OK)
+//	@RequestMapping(value= "/id={id}", method = RequestMethod.GET)
+//	public Property findByID(@PathVariable("id") Integer id) {
+//		Property p= propertyService.findByID(id);
+//		return p;
+//	}
 
 }

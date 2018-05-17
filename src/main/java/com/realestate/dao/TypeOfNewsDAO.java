@@ -9,8 +9,8 @@ import com.realestate.entity.TypeOfNews;
 
 @Repository
 public interface TypeOfNewsDAO extends CrudRepository<TypeOfNews, Integer>{
-    @Query("select u from TypeOfNews u where u.name = ?1")
-    public TypeOfNews findByName(String name);
-    public List<TypeOfNews> findAll();
+//    @Query("select u from TypeOfNews u where u.name = ?1")
+//    public TypeOfNews findByName(String name);
+//    public List<TypeOfNews> findAll();
 }
 

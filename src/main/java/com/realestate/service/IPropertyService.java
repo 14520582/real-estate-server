@@ -5,9 +5,11 @@ import java.util.List;
 import com.realestate.entity.Property;
 
 public interface IPropertyService {
-
- 	List<Property> findAll();
- 	Property findByID(Integer id);
+	Property addProperty(Property pro);
+	Property findOne(int id);
+	List<Property> getNewList(int limit);
+// 	List<Property> findAll();
+// 	Property findByID(Integer id);
 // 	List<House> findByNumofbedroom(Integer numofbedroom);
 // 	List<House> findByNumofbathroom(Integer numofbathroom);
 // 	List<House> findByNumoffloor(Integer numoffloor);

@@ -20,8 +20,24 @@ public class TypeOfNews implements Serializable  {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
     private Integer id;  
+	
 	@Column(name="name")
     private String name;
+	
+	@Column(name="label")
+    private String label;
+	
+	public TypeOfNews(String name, String label) {
+		super();
+		this.name = name;
+		this.label = label;
+	}
+	public String getLabel() {
+		return label;
+	}
+	public void setLabel(String label) {
+		this.label = label;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -35,11 +51,6 @@ public class TypeOfNews implements Serializable  {
 		this.name = name;
 	}
 	
-	public TypeOfNews(Integer id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
 	public TypeOfNews(String name) {
 		super();
 		this.name = name;

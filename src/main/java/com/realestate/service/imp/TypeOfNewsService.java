@@ -12,11 +12,7 @@ import com.realestate.service.ITypeOfNewsService;
 public class TypeOfNewsService implements ITypeOfNewsService{
 	@Autowired
 	private TypeOfNewsDAO typeOfNewsDAO;
-	@Override
-	public TypeOfNews findByName(String name) {
-		// TODO Auto-generated method stub
-		return typeOfNewsDAO.findByName(name);
-	}
+
 	@Override
 	public List<TypeOfNews> findAll() {
 		// TODO Auto-generated method stub

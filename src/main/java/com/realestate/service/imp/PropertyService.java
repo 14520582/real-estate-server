@@ -11,18 +11,18 @@ import com.realestate.entity.Property;
 public class PropertyService implements IPropertyService{
 	@Autowired
 	private PropertyDAO propertyDAO;
-	
-
-	@Override
-	public List<Property> findAll() {
-		return (List<Property>) propertyDAO.findAll();
-	}
-
-	@Override
-	public Property findByID(Integer id){
-		return propertyDAO.findByID(id);
-	}
-	
+//	
+//
+//	@Override
+//	public List<Property> findAll() {
+//		return (List<Property>) propertyDAO.findAll();
+//	}
+//
+//	@Override
+//	public Property findByID(Integer id){
+//		return propertyDAO.findByID(id);
+//	}
+//	
 //	@Override
 //	public List<House> findByNumofbathroom(Integer numofbathroom) {
 //		return (List<House>) houseDAO.findByNumofbathroom(numofbathroom);
@@ -61,5 +61,22 @@ public class PropertyService implements IPropertyService{
 //	public List<House> findByArea(Float minarea, Float maxarea) {
 //		return (List<House>) houseDAO.findByArea(minarea, maxarea);
 //	}
+
+	@Override
+	public Property addProperty(Property pro) {
+		return propertyDAO.save(pro);	
+	}
+
+	@Override
+	public Property findOne(int id) {
+		// TODO Auto-generated method stub
+		return propertyDAO.findOne(id);
+	}
+
+	@Override
+	public List<Property> getNewList(int limit) {
+		// TODO Auto-generated method stub
+		return propertyDAO.getNewList(limit);
+	};
 
 }

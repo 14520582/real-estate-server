@@ -9,8 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="news")
@@ -23,56 +26,109 @@ public class News implements Serializable  {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
     private Integer id;  
-	@Column(name="subject")
-    private String subject;
-	@Column(name="content")
+	
+	@Column(name="title")
+    private String title;
+	
+	@Column(name="headline")
+    private String headline;
+	
+	@Lob 
+	@Column(name="content",length = 100000)
     private String content;
-	@JoinColumn(name = "id_typeofnews", nullable = false)
-	private TypeOfNews typeofnews;
+	
+	@Column(name="thumnail")
+    private String thumnail;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_typeofnews", nullable = false)
+	private TypeOfNews category;
+	
+	@Column(name="datecreated")
+    private long datecreated;
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getSubject() {
-		return subject;
+
+	public String getTitle() {
+		return title;
 	}
-	public void setSubject(String subject){
-		this.subject = subject;
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	
+
+	public String getHeadline() {
+		return headline;
+	}
+
+	public void setHeadline(String headline) {
+		this.headline = headline;
+	}
+
 	public String getContent() {
 		return content;
 	}
-	public void setContent(String content){
+
+	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	public TypeOfNews getTypeOfNews() {
-		return typeofnews;
+
+	public String getThumnail() {
+		return thumnail;
 	}
-	public void setTypeOfNews(TypeOfNews typeofnews){
-		this.typeofnews = typeofnews;
+
+	public void setThumnail(String thumnail) {
+		this.thumnail = thumnail;
 	}
-	
-	public News(Integer id, String subject, String content, TypeOfNews typeofnews) {
+
+	public TypeOfNews getCategory() {
+		return category;
+	}
+
+	public void setCategory(TypeOfNews category) {
+		this.category = category;
+	}
+
+	public long getDatecreated() {
+		return datecreated;
+	}
+
+	public void setDatecreated(long datecreated) {
+		this.datecreated = datecreated;
+	}
+
+	public News(String title, String headline, String content, String thumnail, TypeOfNews category, long datecreated) {
+		super();
+		this.title = title;
+		this.headline = headline;
+		this.content = content;
+		this.thumnail = thumnail;
+		this.category = category;
+		this.datecreated = datecreated;
+	}
+
+	public News(Integer id, String title, String headline, String content, String thumnail, TypeOfNews category,
+			long datecreated) {
 		super();
 		this.id = id;
-		this.subject = subject;
+		this.title = title;
+		this.headline = headline;
 		this.content = content;
-		this.typeofnews = typeofnews;
+		this.thumnail = thumnail;
+		this.category = category;
+		this.datecreated = datecreated;
 	}
-	public News(String subject, String content, TypeOfNews typeofnews) {
-		super();
-		this.subject = subject;
-		this.content = content;
-		this.typeofnews = typeofnews;
-	}
+
 	public News() {
 		super();
 	}
+	
 
 
 }

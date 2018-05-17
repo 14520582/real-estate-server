@@ -18,7 +18,7 @@ public class TypeOfNewsController {
 	private ITypeOfNewsService typeOfNewsService;
 	
 	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value= "/all", method = RequestMethod.GET)
+	@RequestMapping(value= "/get/all", method = RequestMethod.GET)
 	public List<TypeOfNews> findAll() {
 		List<TypeOfNews> list = typeOfNewsService.findAll();
 		return list;

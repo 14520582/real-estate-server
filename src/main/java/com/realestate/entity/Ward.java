@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ward")
 
-
 public class Ward implements Serializable {
 	
 	private static final long serialVersionUID = 4L;
@@ -30,6 +29,7 @@ public class Ward implements Serializable {
 	
 	@Column(name="name")
     private String name;
+	
 	
 	public Integer getId() {
 		return id;
@@ -61,6 +61,10 @@ public class Ward implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.district = district;
+	}
+	public Ward(Integer id){
+		super();
+		this.id = id;
 	}
 	
 	public Ward( District district, String name){

@@ -9,8 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="property")
@@ -22,213 +25,259 @@ public class Property implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
 	private Integer id;  
-	@Column(name="subject")
-	private String subject;
-	@Column(name="address")
-	private String address;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_province", nullable = false)
-	private Province province;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_district", nullable = false)
-	private District district;
+	
+	@Column(name="title")
+	private String title;
+
 	@Column(name="price")	
 	private int price;
 	
-	@Column(name="sellorrent")	
-	private int sellorrent; // sell = 0 ; rent = 1;	
+	@Column(name="form")	
+	private int form; // sell = 0 ; rent = 1;	
 	
-	@Column(name="redorpinkbook")	
-	private int redorpinkbook; // red = 0 ; pink = 1;	
+	@Column(name="license")	
+	private int license; // red = 0 ; pink = 1;	
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="id_address")	
+	private Address address;
 	
 	@Column(name="numofbedroom")	
 	private int numofbedroom;	
+	
 	@Column(name="numofbathroom")	
 	private int numofbathroom;
+	
+	@Column(name="phone")	
+	private String phone;
+	
+	@Column(name="nameOfOwner")	
+	private String nameOfOwner;	
+
+	@Column(name="email")	
+	private String email;
+	
 	@Column(name="numoffloor")	
 	private int numoffloor;	
-	@Column(name="orientation")
-	private String orientation;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_type", nullable = false)
-	private Type type;
+	
+	@Column(name="direction")
+	private String direction;
+	
+	@Column(name="type")
+	private int type;
 
 	@Column (name = "height")
 	private  float height;
+	
 	@Column (name = "width")
 	private  float width;
+	
 	@Column(name="area")	
-	private float area;	
+	private float area;
+	
+	@Lob 
+	@Column(name="description",length = 100000)
+    private String description;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_account", nullable = false)
+	@JoinColumn(name = "id_account")
+	@JsonIgnoreProperties({"token", "password", "role"})
 	private Account account;
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getSubject() {
-		return subject;
+
+	public String getTitle() {
+		return title;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	
-	public Province getProvince() {
-		return province;
-	}
-	public void setProvince(Province province) {
-		this.province = province;
-	}
-	public District getDistrict() {
-		return district;
-	}
-	public void setDistrict(District district) {
-		this.district = district;
-	}
+
 	public int getPrice() {
 		return price;
 	}
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
-	public Integer getSellorrent() {
-		return sellorrent;
+
+	public int getForm() {
+		return form;
 	}
-	public void setSellorrent(Integer sor) {
-		this.sellorrent = sor;
+
+	public void setForm(int form) {
+		this.form = form;
 	}
-	
-	public Integer getRedorpinkbook() {
-		return redorpinkbook;
+
+	public int getLicense() {
+		return license;
 	}
-	public void setRedorpinkbook(Integer rop) {
-		this.redorpinkbook = rop;
+
+	public void setLicense(int license) {
+		this.license = license;
 	}
-	
-	
-	public Integer getNumofbedroom() {
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public int getNumofbedroom() {
 		return numofbedroom;
 	}
-	public void setNumofbedroom(Integer numofbedroom) {
+
+	public void setNumofbedroom(int numofbedroom) {
 		this.numofbedroom = numofbedroom;
 	}
-	public Integer getNumofbathroom() {
+
+	public int getNumofbathroom() {
 		return numofbathroom;
 	}
-	public void setNumofbathroom(Integer numofbathroom) {
+
+	public void setNumofbathroom(int numofbathroom) {
 		this.numofbathroom = numofbathroom;
 	}
 
-	public Integer getNumoffloor() {
+	public int getNumoffloor() {
 		return numoffloor;
 	}
-	public void setNumoffloor(Integer numoffloor) {
+
+	public void setNumoffloor(int numoffloor) {
 		this.numoffloor = numoffloor;
 	}
-	
-	public String getOrientation() {
-		return orientation;
+
+	public String getDirection() {
+		return direction;
 	}
-	public void setOrientation(String orientation) {
-		this.orientation = orientation;
+
+	public void setDirection(String direction) {
+		this.direction = direction;
 	}
-	
-	public Float getArea() {
-		return area;
+
+	public int getType() {
+		return type;
 	}
-	public void setArea(Float area) {
-		this.area = area;
+
+	public void setType(int type) {
+		this.type = type;
 	}
-	
-	public Float getHeight() {
+
+	public float getHeight() {
 		return height;
 	}
-	public void setHeight(Float height) {
+
+	public void setHeight(float height) {
 		this.height = height;
 	}
 
-	public Float getWidth() {
+	public float getWidth() {
 		return width;
 	}
-	public void setWidth(Float width) {
+
+	public void setWidth(float width) {
 		this.width = width;
 	}
-	
-	
 
-	public Type getType() {
-		return type;
+	public float getArea() {
+		return area;
 	}
-	public void setType(Type type) {
-		this.type = type;
+
+	public void setArea(float area) {
+		this.area = area;
 	}
-	
+
 	public Account getAccount() {
 		return account;
 	}
-	public void setAccount(Account acc) {
-		this.account = acc;
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
-	
-	public Property(){
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getNameOfOwner() {
+		return nameOfOwner;
+	}
+
+	public void setNameOfOwner(String nameOfOwner) {
+		this.nameOfOwner = nameOfOwner;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Property() {
 		super();
 	}
 	
-	public Property(Integer id, String subject, String address, Province province, District district, Integer price, Integer sor, Integer rop,
-			Float area, Integer numofbedroom,Integer numofbathroom, Integer numoffloor, String orientation,Account acc, Type type){
+	public Property(String title, int price, int form, int license, Address address, int numofbedroom,
+			int numofbathroom, String phone, String nameOfOwner, String email, int numoffloor, String direction,
+			int type, float height, float width, float area, Account account) {
+		super();
+		this.title = title;
+		this.price = price;
+		this.form = form;
+		this.license = license;
+		this.address = address;
+		this.numofbedroom = numofbedroom;
+		this.numofbathroom = numofbathroom;
+		this.phone = phone;
+		this.nameOfOwner = nameOfOwner;
+		this.email = email;
+		this.numoffloor = numoffloor;
+		this.direction = direction;
+		this.type = type;
+		this.height = height;
+		this.width = width;
+		this.area = area;
+		this.account = account;
+	}
+
+	public Property(Integer id, String title, int price, int form, int license, Address address, int numofbedroom,
+			int numofbathroom, String phone, String nameOfOwner, String email, int numoffloor, String direction,
+			int type, float height, float width, float area, Account account) {
 		super();
 		this.id = id;
-		this.subject = subject;
-		this.address = address;
-		this.province = province;
-		this.district = district;
+		this.title = title;
 		this.price = price;
-		this.area = area;
+		this.form = form;
+		this.license = license;
+		this.address = address;
 		this.numofbedroom = numofbedroom;
 		this.numofbathroom = numofbathroom;
+		this.phone = phone;
+		this.nameOfOwner = nameOfOwner;
+		this.email = email;
 		this.numoffloor = numoffloor;
-		this.orientation = orientation;
+		this.direction = direction;
 		this.type = type;
-		this.account = acc;
-		this.redorpinkbook = rop;
-		this.sellorrent = sor;
-		
+		this.height = height;
+		this.width = width;
+		this.area = area;
+		this.account = account;
 	}
 	
 	
-	public Property(String subject, String address, Province province, District district, Integer price, Integer sor, Integer rop,
-			Float area, Integer numofbedroom,Integer numofbathroom, Integer numoffloor, String orientation,Account acc, Type type){
-		super();
-		//this.id = id;
-		this.subject = subject;
-		this.address = address;
-		this.province = province;
-		this.district = district;
-		this.price = price;
-		this.area = area;
-		this.numofbedroom = numofbedroom;
-		this.numofbathroom = numofbathroom;
-		this.numoffloor = numoffloor;
-		this.orientation = orientation;
-		this.type = type;
-		this.account = acc;
-		this.redorpinkbook = rop;
-		this.sellorrent = sor;
-		
-	}
-	
-
 }

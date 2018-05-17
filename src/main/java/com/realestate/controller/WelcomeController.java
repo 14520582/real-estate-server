@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.realestate.entity.Account;
 
 @RestController
+@RequestMapping("/")
 public class WelcomeController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<String> welcome() {

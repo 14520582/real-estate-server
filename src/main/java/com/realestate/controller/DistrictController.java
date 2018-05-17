@@ -15,22 +15,14 @@ import com.realestate.service.IDistrictService;;
 @RestController
 @RequestMapping("/District")
 public class DistrictController {
-	@Autowired
-	private IDistrictService districtService;
-	
-	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value= "/all", method = RequestMethod.GET)
-	public List<District> findAll() {
-		List<District> list = districtService.findAll();
-		return list;
-	}
-	
-	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value= "/{nameProvince}", method = RequestMethod.GET)
-	public List<District> getDistrictByProvince(@PathVariable("nameProvince") String nameProvince) {
-		List<District> list = districtService.getDistrictByProvince(nameProvince);
-		return list;
-	}
-	
+//	@Autowired
+//	private IDistrictService districtService;
+//	
+//	@ResponseStatus(HttpStatus.OK)
+//	@RequestMapping(value= "/all", method = RequestMethod.GET)
+//	public List<District> findAll() {
+//		List<District> list = districtService.findAll();
+//		return list;
+//	}	
 	
 }

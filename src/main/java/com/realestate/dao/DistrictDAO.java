@@ -11,6 +11,5 @@ import com.realestate.entity.District;
 @Repository
 public interface DistrictDAO extends CrudRepository<District, Integer> {
 	public List<District> findAll();
-	@Query("SELECT e FROM District e WHERE e.province.name = :nameProvince")
-	public List<District> getDistrictByProvince(@Param("nameProvince") String nameProvince); 
+ 
 }
