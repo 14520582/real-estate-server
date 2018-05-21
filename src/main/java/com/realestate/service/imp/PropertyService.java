@@ -3,14 +3,24 @@ package com.realestate.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.realestate.service.*;
 import com.realestate.dao.PropertyDAO;
 import com.realestate.entity.Property;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+
 @Service(value = "propertyService")
 public class PropertyService implements IPropertyService{
 	@Autowired
 	private PropertyDAO propertyDAO;
+	private final RestTemplate restTemplate = new RestTemplate();
 //	
 //
 //	@Override
@@ -86,6 +96,24 @@ public class PropertyService implements IPropertyService{
 			return propertyDAO.findByDistrictAndForm(name, form);
 		else
 			return propertyDAO.findByDistrict(name);
+	}
+
+	@Override
+	public List<Property> findByItemBased(int id) {
+		// TODO Auto-generated method stub
+		String url = "http://127.0.0.1:5000/item/" + id;	
+		ResponseEntity<List<Integer>> result =  restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Integer>>(){});
+		List<Integer> listId = result.getBody();
+		return (List<Property>) propertyDAO.findAll(listId);
+	};
+	
+	@Override
+	public List<Property> findByUserBased(int id) {
+		// TODO Auto-generated method stub
+		String url = "http://127.0.0.1:5000/user/" + id;	
+		ResponseEntity<List<Integer>> result =  restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Integer>>(){});
+		List<Integer> listId = result.getBody();
+		return (List<Property>) propertyDAO.findAll(listId);
 	};
 
 }

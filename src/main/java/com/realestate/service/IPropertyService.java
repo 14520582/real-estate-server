@@ -8,6 +8,8 @@ public interface IPropertyService {
 	Property addProperty(Property pro);
 	Property findOne(int id);
 	List<Property> getNewList(int limit);
+	List<Property> findByItemBased(int id);
+	List<Property> findByUserBased(int id);
 	List<Property> findByDistrictAndForm(String name, int form);
 // 	List<Property> findAll();
 // 	Property findByID(Integer id);

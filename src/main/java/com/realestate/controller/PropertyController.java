@@ -55,8 +55,22 @@ public class PropertyController {
 	
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value= "/get/{name}/{form}", method = RequestMethod.GET)
-	public List<Property> findByID(@PathVariable("name") String name, @PathVariable("form") int form) {
+	public List<Property> findByDistrictAndForm(@PathVariable("name") String name, @PathVariable("form") int form) {
 		List<Property> p= propertyService.findByDistrictAndForm(name, form);
+		return p;
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value= "/get/itembased/{id}", method = RequestMethod.GET)
+	public List<Property> findByItemBased(@PathVariable("id") int id) {
+		List<Property> p= propertyService.findByItemBased(id);
+		return p;
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value= "/get/userbased/{id}", method = RequestMethod.GET)
+	public List<Property> findByUserBased(@PathVariable("id") int id) {
+		List<Property> p= propertyService.findByUserBased(id);
 		return p;
 	}
 	

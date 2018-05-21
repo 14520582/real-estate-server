@@ -64,7 +64,7 @@ public class Property implements Serializable {
 	private int numoffloor;	
 	
 	@Column(name="direction")
-	private String direction;
+	private int direction;
 	
 	@Column(name="type")
 	private int type;
@@ -159,11 +159,11 @@ public class Property implements Serializable {
 		this.numoffloor = numoffloor;
 	}
 
-	public String getDirection() {
+	public int getDirection() {
 		return direction;
 	}
 
-	public void setDirection(String direction) {
+	public void setDirection(int direction) {
 		this.direction = direction;
 	}
 
@@ -252,7 +252,7 @@ public class Property implements Serializable {
 	}
 
 	public Property(String title, int price, int form, int license, Address address, String cover, int numofbedroom,
-			int numofbathroom, String phone, String nameOfOwner, String email, int numoffloor, String direction,
+			int numofbathroom, String phone, String nameOfOwner, String email, int numoffloor, int direction,
 			int type, float height, float width, float area, String description, Account account) {
 		super();
 		this.title = title;
@@ -278,7 +278,7 @@ public class Property implements Serializable {
 
 	public Property(Integer id, String title, int price, int form, int license, Address address, String cover,
 			int numofbedroom, int numofbathroom, String phone, String nameOfOwner, String email, int numoffloor,
-			String direction, int type, float height, float width, float area, String description, Account account) {
+			int direction, int type, float height, float width, float area, String description, Account account) {
 		super();
 		this.id = id;
 		this.title = title;
