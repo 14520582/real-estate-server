@@ -53,4 +53,10 @@ public class AccountService implements IAccountService{
 		accountDAO.save(acc);
 	}
 
+	@Override
+	public Account updateAccount(Account acc) {
+		// TODO Auto-generated method stub
+		return accountDAO.save(acc);
+	}
+
 }

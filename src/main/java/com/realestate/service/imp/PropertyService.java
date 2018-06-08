@@ -114,6 +114,12 @@ public class PropertyService implements IPropertyService{
 		ResponseEntity<List<Integer>> result =  restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Integer>>(){});
 		List<Integer> listId = result.getBody();
 		return (List<Property>) propertyDAO.findAll(listId);
+	}
+
+	@Override
+	public List<Property> filter(Property item) {
+		// TODO Auto-generated method stub
+		return (List<Property>) propertyDAO.findAll();
 	};
 
 }

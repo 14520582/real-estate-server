@@ -10,4 +10,5 @@ public interface IAccountService {
      	Account findOne(String username);
      	void update(Account acc);
      	Account findByName(String name);
+     	Account updateAccount(Account acc);
 }

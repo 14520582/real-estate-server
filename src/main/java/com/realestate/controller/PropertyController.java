@@ -46,6 +46,13 @@ public class PropertyController {
         return newItem;
 	}
 	
+	@RequestMapping(value= "/get/filter", method = RequestMethod.POST)
+	public List<Property> filter(@RequestBody Property item) {
+		
+		List<Property> items = propertyService.filter(item);
+        return items;
+	}
+	
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value= "/get/{id}", method = RequestMethod.GET)
 	public Property findByID(@PathVariable("id") Integer id) {

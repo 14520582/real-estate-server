@@ -19,6 +19,12 @@ public interface PropertyDAO  extends CrudRepository<Property, Integer>{
 	  
 	  @Query("SELECT u FROM Property u WHERE LOWER(u.address.district.name) = LOWER(:name) and u.form = :form")
 	  public List<Property> findByDistrictAndForm(@Param("name") String name, @Param("form") int form);
+	  
+	  
+//	  @Query("SELECT u FROM Property u WHERE u.address.city.id = :item.address.city.id "
+//	  		+ "&& u.address.district.id = :item.address.district.id "
+//	  		+ "&& u.address.ward.id = :item.address.ward.id")
+//	  public List<Property> filter(@Param("item") Property item);
 //    @Query("select u from House u where u.subject like %?1%")
 //    public List<House> findBySubject(String subject);
 //    

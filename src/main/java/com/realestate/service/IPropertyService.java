@@ -10,6 +10,7 @@ public interface IPropertyService {
 	List<Property> getNewList(int limit);
 	List<Property> findByItemBased(int id);
 	List<Property> findByUserBased(int id);
+	List<Property> filter(Property item);
 	List<Property> findByDistrictAndForm(String name, int form);
 // 	List<Property> findAll();
 // 	Property findByID(Integer id);
