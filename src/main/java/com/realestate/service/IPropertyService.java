@@ -2,6 +2,10 @@ package com.realestate.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.realestate.entity.News;
 import com.realestate.entity.Property;
 
 public interface IPropertyService {
@@ -10,7 +14,7 @@ public interface IPropertyService {
 	List<Property> getNewList(int limit);
 	List<Property> findByItemBased(int id);
 	List<Property> findByUserBased(int id);
-	List<Property> filter(Property item);
+	Page<Property> filter(String content, Pageable pageable);
 	List<Property> findByDistrictAndForm(String name, int form);
 // 	List<Property> findAll();
 // 	Property findByID(Integer id);

@@ -10,6 +10,7 @@ import com.realestate.entity.District;
 
 @Repository
 public interface DistrictDAO extends CrudRepository<District, Integer> {
-	public List<District> findAll();
+	@Query("select u from District u where u.city.id = :city")
+	public List<District> findByCity(@Param("city") int city);
  
 }

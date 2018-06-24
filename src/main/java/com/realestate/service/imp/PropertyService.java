@@ -1,9 +1,15 @@
 package com.realestate.service.imp;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,6 +18,10 @@ import org.springframework.stereotype.Service;
 import com.realestate.service.*;
 import com.realestate.dao.PropertyDAO;
 import com.realestate.entity.Property;
+import com.realestate.filter.SearchCriteria;
+import com.realestate.filter.PropertySpecification;
+import com.realestate.filter.PropertySpecificationsBuilder;
+
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -117,9 +127,15 @@ public class PropertyService implements IPropertyService{
 	}
 
 	@Override
-	public List<Property> filter(Property item) {
-		// TODO Auto-generated method stub
-		return (List<Property>) propertyDAO.findAll();
+	public Page<Property> filter(String content, Pageable pageable) {
+		PropertySpecificationsBuilder builder = new PropertySpecificationsBuilder();
+        Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
+        Matcher matcher = pattern.matcher(content + ",");
+        while (matcher.find()) {
+            builder.with(matcher.group(1), matcher.group(2), matcher.group(3));
+        }
+		Specification<Property> spec = builder.build();
+		return (Page<Property>) propertyDAO.findAll(Specifications.where(spec),pageable);
 	};
 
 }

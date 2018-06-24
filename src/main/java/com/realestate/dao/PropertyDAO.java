@@ -1,6 +1,7 @@
 package com.realestate.dao;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.realestate.entity.Property;
 
 @Repository
-public interface PropertyDAO  extends CrudRepository<Property, Integer>{
+public interface PropertyDAO  extends CrudRepository<Property, Integer>, JpaSpecificationExecutor<Property>{
 	  @Query(value = "SELECT * FROM property ORDER BY id DESC LIMIT :limit", nativeQuery = true)
 	  public List<Property> getNewList(@Param("limit") int limit);
 	  

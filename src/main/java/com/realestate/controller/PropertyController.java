@@ -7,6 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,11 +50,10 @@ public class PropertyController {
         return newItem;
 	}
 	
-	@RequestMapping(value= "/get/filter", method = RequestMethod.POST)
-	public List<Property> filter(@RequestBody Property item) {
-		
-		List<Property> items = propertyService.filter(item);
-        return items;
+	@RequestMapping(value= "/get/filter", method = RequestMethod.GET)
+	public Page<Property> filter(@RequestParam("page") int page, @RequestParam("pagesize") int pageSize, @RequestParam("content") String content) {
+    	Pageable pageable = new PageRequest(page, pageSize, Sort.Direction.DESC, "id");
+    	return propertyService.filter(content, pageable);
 	}
 	
 	@ResponseStatus(HttpStatus.OK)
