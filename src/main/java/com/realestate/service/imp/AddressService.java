@@ -15,6 +15,4 @@ public class AddressService implements IAddressService{
 	public Address addAddress(Address add) {
 		return addressDAO.save(add);
 	}
-	
-	
 }

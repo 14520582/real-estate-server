@@ -49,13 +49,31 @@ public class PropertyController {
 		Property newItem = propertyService.addProperty(item);
         return newItem;
 	}
-	
+	@RequestMapping(value= "/get/predict", method = RequestMethod.POST)
+	public float predictProperty(@RequestBody Property item) {
+		float price = propertyService.predict(item);
+        return price;
+	}
+	@RequestMapping(value= "/delete/{id}", method = RequestMethod.DELETE)
+	public void deleteProperty(@PathVariable("id") int id) {
+		propertyService.deleteProperty(id);
+	}
+	@RequestMapping(value= "/update", method = RequestMethod.PUT)
+	public Property updateProperty(@RequestBody Property item) {
+		item.setAddress(addressService.addAddress(item.getAddress()));
+		Property newItem = propertyService.addProperty(item);
+        return newItem;
+	}
 	@RequestMapping(value= "/get/filter", method = RequestMethod.GET)
 	public Page<Property> filter(@RequestParam("page") int page, @RequestParam("pagesize") int pageSize, @RequestParam("content") String content) {
     	Pageable pageable = new PageRequest(page, pageSize, Sort.Direction.DESC, "id");
     	return propertyService.filter(content, pageable);
 	}
-	
+	@RequestMapping(value= "/get/byText", method = RequestMethod.GET)
+	public Page<Property> filterByText(@RequestParam("page") int page, @RequestParam("pagesize") int pageSize, @RequestParam("id") int id) {
+    	Pageable pageable = new PageRequest(page, pageSize, Sort.Direction.DESC, "id");
+    	return propertyService.findById(id, pageable);
+	}
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value= "/get/{id}", method = RequestMethod.GET)
 	public Property findByID(@PathVariable("id") Integer id) {
@@ -88,6 +106,18 @@ public class PropertyController {
 	@RequestMapping(value= "/get/new", method = RequestMethod.GET)
 	public List<Property> getNewList(@RequestParam("limit") Integer limit) {
 		return propertyService.getNewList(limit);
+	}
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value= "/get/uptown", method = RequestMethod.GET)
+	public Page<Property> getUptownList(@RequestParam("page") int page, @RequestParam("pagesize") int pageSize) {
+		Pageable pageable = new PageRequest(page, pageSize, Sort.Direction.DESC, "id");
+		return propertyService.getUptownList(pageable);
+	}
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value= "/get/downtown", method = RequestMethod.GET)
+	public Page<Property> getDowntownList(@RequestParam("page") int page, @RequestParam("pagesize") int pageSize) {
+		Pageable pageable = new PageRequest(page, pageSize, Sort.Direction.DESC, "id");
+		return propertyService. getDowntownList(pageable);
 	}
 //	@ResponseStatus(HttpStatus.OK)
 //	@RequestMapping(value= "/all", method = RequestMethod.GET)

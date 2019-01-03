@@ -1,7 +1,10 @@
 package com.realestate.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -30,7 +34,8 @@ public class News implements Serializable  {
 	@Column(name="title")
     private String title;
 	
-	@Column(name="headline")
+	@Lob
+	@Column(name="headline",length = 1000)
     private String headline;
 	
 	@Lob 
@@ -46,6 +51,9 @@ public class News implements Serializable  {
 	
 	@Column(name="datecreated")
     private long datecreated;
+	
+	@OneToMany(mappedBy="news", cascade = CascadeType.ALL, targetEntity = UnitNews.class)
+	private List<UnitNews> unites = new ArrayList<UnitNews>();
 	
 	@Column(name="views")
     private int views = 0;
@@ -114,8 +122,53 @@ public class News implements Serializable  {
 		this.datecreated = datecreated;
 	}
 
+	public List<UnitNews> getUnites() {
+		return unites;
+	}
+
+	public void setUnites(List<UnitNews> unites) {
+		this.unites = unites;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	public void clearUnites() {
+		this.unites.clear();
+	}
+	public void addUnit(UnitNews e){
+		unites.add(e);
+	}
 	public News() {
 		super();
+	}
+
+	
+	public News(Integer id, String title, String headline, String content, String thumbnail, TypeOfNews category,
+			long datecreated, List<UnitNews> unites, int views) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.headline = headline;
+		this.content = content;
+		this.thumbnail = thumbnail;
+		this.category = category;
+		this.datecreated = datecreated;
+		this.unites = unites;
+		this.views = views;
+	}
+
+	public News(String title, String headline, String content, String thumbnail, TypeOfNews category, long datecreated,
+			List<UnitNews> unites, int views) {
+		super();
+		this.title = title;
+		this.headline = headline;
+		this.content = content;
+		this.thumbnail = thumbnail;
+		this.category = category;
+		this.datecreated = datecreated;
+		this.unites = unites;
+		this.views = views;
 	}
 
 	public News(Integer id, String title, String headline, String content, String thumbnail, TypeOfNews category,

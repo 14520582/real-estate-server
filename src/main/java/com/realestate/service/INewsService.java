@@ -12,6 +12,8 @@ public interface INewsService {
 	Page<News> findByPageAndCategory(String category, Pageable pageable);
 	List<News> findMostView();
 	News findById(int id);
+	void delete(int id);
+	News save(News item);
 //	List<News> getNewsByType(String type);
 //	List<News> ascNews();
 //	List<News> desNews();

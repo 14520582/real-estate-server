@@ -1,6 +1,8 @@
 package com.realestate.dao;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,7 +23,14 @@ public interface PropertyDAO  extends CrudRepository<Property, Integer>, JpaSpec
 	  @Query("SELECT u FROM Property u WHERE LOWER(u.address.district.name) = LOWER(:name) and u.form = :form")
 	  public List<Property> findByDistrictAndForm(@Param("name") String name, @Param("form") int form);
 	  
+	  @Query("SELECT u FROM Property u WHERE u.address.district.id in :ids")
+	  public Page<Property> getUptownList(@Param("ids") List<Integer> idList, Pageable pageable);
 	  
+	  @Query("SELECT u FROM Property u WHERE u.address.district.id in :ids")
+	  public Page<Property> getDowntownList(@Param("ids") List<Integer> idList, Pageable pageable);
+	  
+	  @Query("SELECT u FROM Property u WHERE u.id like :id")
+	  public Page<Property> findById(@Param("id") Integer id, Pageable pageable);
 //	  @Query("SELECT u FROM Property u WHERE u.address.city.id = :item.address.city.id "
 //	  		+ "&& u.address.district.id = :item.address.district.id "
 //	  		+ "&& u.address.ward.id = :item.address.ward.id")

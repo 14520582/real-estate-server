@@ -32,6 +32,18 @@ public class NewsService implements INewsService{
 		// TODO Auto-generated method stub
 		return newsDAO.findOne(id);
 	}
+
+	@Override
+	public News save(News item) {
+		// TODO Auto-generated method stub
+		return newsDAO.save(item);
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		newsDAO.delete(id);
+	}
 	
 //	
 //	@Override

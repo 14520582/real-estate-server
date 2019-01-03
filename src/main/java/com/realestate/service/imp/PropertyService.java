@@ -1,5 +1,6 @@
 package com.realestate.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,56 +32,6 @@ public class PropertyService implements IPropertyService{
 	@Autowired
 	private PropertyDAO propertyDAO;
 	private final RestTemplate restTemplate = new RestTemplate();
-//	
-//
-//	@Override
-//	public List<Property> findAll() {
-//		return (List<Property>) propertyDAO.findAll();
-//	}
-//
-//	@Override
-//	public Property findByID(Integer id){
-//		return propertyDAO.findByID(id);
-//	}
-//	
-//	@Override
-//	public List<House> findByNumofbathroom(Integer numofbathroom) {
-//		return (List<House>) houseDAO.findByNumofbathroom(numofbathroom);
-//	}
-//	
-//	@Override
-//	public List<House> findByNumoffloor(Integer numoffloor) {
-//		return (List<House>) houseDAO.findByNumoffloor(numoffloor);
-//	}
-//	
-//	@Override
-//	public List<House> findBySubject(String subject) {
-//		// TODO Auto-generated method stub
-//		return (List<House>) houseDAO.findBySubject(subject);
-//	}
-//	
-//
-//	@Override
-//	public List<House> findByOrientation(String orientation) {
-//		// TODO Auto-generated method stub
-//		return (List<House>) houseDAO.findByOrientation(orientation);
-//	}
-//	
-//	@Override
-//	public List<House> findByLocation(String location) {
-//		// TODO Auto-generated method stub
-//		return (List<House>) houseDAO.findByLocation(location);
-//	}
-//	
-//	@Override
-//	public List<House> findByPrice(Integer minprice, Integer maxprice) {
-//		return (List<House>) houseDAO.findByPrice(minprice, maxprice);
-//	}
-//	
-//	@Override
-//	public List<House> findByArea(Float minarea, Float maxarea) {
-//		return (List<House>) houseDAO.findByArea(minarea, maxarea);
-//	}
 
 	@Override
 	public Property addProperty(Property pro) {
@@ -98,7 +49,29 @@ public class PropertyService implements IPropertyService{
 		// TODO Auto-generated method stub
 		return propertyDAO.getNewList(limit);
 	}
-
+	
+	@Override
+	public Page<Property> getUptownList(Pageable pageable) {
+		// TODO Auto-generated method stub
+		List<Integer> upTown = new ArrayList<Integer>();
+		upTown.add(760);
+		upTown.add(767);
+		upTown.add(768);
+		upTown.add(774);
+		upTown.add(766);
+		return propertyDAO.getUptownList(upTown, pageable);
+	}
+	@Override
+	public Page<Property> getDowntownList(Pageable pageable) {
+		// TODO Auto-generated method stub
+		List<Integer> downTown = new ArrayList<Integer>();
+		downTown.add(783);
+		downTown.add(784);
+		downTown.add(786);
+		downTown.add(787);
+		downTown.add(762);
+		return propertyDAO.getDowntownList(downTown, pageable);
+	}
 	@Override
 	public List<Property> findByDistrictAndForm(String name, int form) {
 		// TODO Auto-generated method stub
@@ -136,6 +109,39 @@ public class PropertyService implements IPropertyService{
         }
 		Specification<Property> spec = builder.build();
 		return (Page<Property>) propertyDAO.findAll(Specifications.where(spec),pageable);
+	}
+
+	@Override
+	public void deleteProperty(int id) {
+		// TODO Auto-generated method stub
+		propertyDAO.delete(id);
+	}
+
+	@Override
+	public Page<Property> findById(int id, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return propertyDAO.findById(id, pageable);
+	}
+
+	@Override
+	public float predict(Property pro) {
+		String url = "http://127.0.0.1:5000/predict";
+		List<Integer> data = new ArrayList<>();
+		data.add(75);
+		data.add(12);
+		data.add(6);
+		data.add(0);
+		data.add(2);
+		data.add(0);
+		data.add(2);
+		data.add(2);
+		data.add(1);
+		data.add(1);
+		data.add(27430);
+		data.add(776);
+		ResponseEntity<Float> result =  restTemplate.postForObject(url, data, ResponseEntity.class);
+		float listId = result.getBody();
+		return listId;
 	};
 
 }

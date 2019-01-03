@@ -4,30 +4,24 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Lob;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name="property")
+@Table(name="pending")
 
-public class Property implements Serializable {
+public class Pending implements Serializable  {
 	
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 9L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
 	private Integer id;  
-	
-	@Column(name="title")
-	private String title;
 
 	@Column(name="price")	
 	private int price;
@@ -38,12 +32,6 @@ public class Property implements Serializable {
 	@Column(name="license")	
 	private int license; // red = 0 ; pink = 1;	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="id_address")	
-	private Address address;
-	
-	@Column(name="cover")
-	private String cover;
 	
 	@Column(name="numofbedroom")	
 	private int numofbedroom;	
@@ -81,11 +69,6 @@ public class Property implements Serializable {
 	@Lob 
 	@Column(name="description",length = 100000)
     private String description;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_account")
-	@JsonIgnoreProperties({"token", "password", "role"})
-	private Account account;
 
 	public Integer getId() {
 		return id;
@@ -93,14 +76,6 @@ public class Property implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public int getPrice() {
@@ -127,14 +102,6 @@ public class Property implements Serializable {
 		this.license = license;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
 	public int getNumofbedroom() {
 		return numofbedroom;
 	}
@@ -149,6 +116,30 @@ public class Property implements Serializable {
 
 	public void setNumofbathroom(int numofbathroom) {
 		this.numofbathroom = numofbathroom;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getNameOfOwner() {
+		return nameOfOwner;
+	}
+
+	public void setNameOfOwner(String nameOfOwner) {
+		this.nameOfOwner = nameOfOwner;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getNumoffloor() {
@@ -199,38 +190,6 @@ public class Property implements Serializable {
 		this.area = area;
 	}
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getNameOfOwner() {
-		return nameOfOwner;
-	}
-
-	public void setNameOfOwner(String nameOfOwner) {
-		this.nameOfOwner = nameOfOwner;
-	}
-
-	public String getcover() {
-		return cover;
-	}
-
-	public void setcover(String cover) {
-		this.cover = cover;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -238,79 +197,19 @@ public class Property implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Property() {
+	public Pending() {
 		super();
 	}
 
-	public Property(String title, int price, int form, int license, Address address, String cover, int numofbedroom,
-			int numofbathroom, String phone, String nameOfOwner, String email, int numoffloor, int direction,
-			int type, float height, float width, float area, String description, Account account) {
-		super();
-		this.title = title;
-		this.price = price;
-		this.form = form;
-		this.license = license;
-		this.address = address;
-		this.cover = cover;
-		this.numofbedroom = numofbedroom;
-		this.numofbathroom = numofbathroom;
-		this.phone = phone;
-		this.nameOfOwner = nameOfOwner;
-		this.email = email;
-		this.numoffloor = numoffloor;
-		this.direction = direction;
-		this.type = type;
-		this.height = height;
-		this.width = width;
-		this.area = area;
-		this.description = description;
-		this.account = account;
-	}
-
-	public Property(String title, int price, int form, int license, Address address, String cover, int numofbedroom,
-			int numofbathroom, String phone, String nameOfOwner, String email, int numoffloor, int direction, int type,
-			float height, float width, float area, String description) {
-		super();
-		this.title = title;
-		this.price = price;
-		this.form = form;
-		this.license = license;
-		this.address = address;
-		this.cover = cover;
-		this.numofbedroom = numofbedroom;
-		this.numofbathroom = numofbathroom;
-		this.phone = phone;
-		this.nameOfOwner = nameOfOwner;
-		this.email = email;
-		this.numoffloor = numoffloor;
-		this.direction = direction;
-		this.type = type;
-		this.height = height;
-		this.width = width;
-		this.area = area;
-		this.description = description;
-	}
-
-	public Property(Integer id, String title, int price, int form, int license, Address address, String cover,
-			int numofbedroom, int numofbathroom, String phone, String nameOfOwner, String email, int numoffloor,
-			int direction, int type, float height, float width, float area, String description, Account account) {
+	public Pending(Integer id, int price, int form, int license, int numofbedroom, int numofbathroom, String phone,
+			String nameOfOwner, String email, int numoffloor, int direction, int type, float height, float width,
+			float area, String description) {
 		super();
 		this.id = id;
-		this.title = title;
 		this.price = price;
 		this.form = form;
 		this.license = license;
-		this.address = address;
-		this.cover = cover;
 		this.numofbedroom = numofbedroom;
 		this.numofbathroom = numofbathroom;
 		this.phone = phone;
@@ -323,8 +222,29 @@ public class Property implements Serializable {
 		this.width = width;
 		this.area = area;
 		this.description = description;
-		this.account = account;
 	}
+
+	public Pending(int price, int form, int license, int numofbedroom, int numofbathroom, String phone,
+			String nameOfOwner, String email, int numoffloor, int direction, int type, float height, float width,
+			float area, String description) {
+		super();
+		this.price = price;
+		this.form = form;
+		this.license = license;
+		this.numofbedroom = numofbedroom;
+		this.numofbathroom = numofbathroom;
+		this.phone = phone;
+		this.nameOfOwner = nameOfOwner;
+		this.email = email;
+		this.numoffloor = numoffloor;
+		this.direction = direction;
+		this.type = type;
+		this.height = height;
+		this.width = width;
+		this.area = area;
+		this.description = description;
+	}
+
 
 
 	
