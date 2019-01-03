@@ -42,6 +42,15 @@ public class Pending implements Serializable  {
 	@Column(name="phone")	
 	private String phone;
 	
+	@Column(name="address")	
+	private String address;
+	
+	@Column(name="title")	
+	private String title;
+	
+	@Column(name="cover")	
+	private String cover;
+	
 	@Column(name="nameOfOwner")	
 	private String nameOfOwner;	
 
@@ -190,6 +199,14 @@ public class Pending implements Serializable  {
 		this.area = area;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -203,8 +220,8 @@ public class Pending implements Serializable  {
 	}
 
 	public Pending(Integer id, int price, int form, int license, int numofbedroom, int numofbathroom, String phone,
-			String nameOfOwner, String email, int numoffloor, int direction, int type, float height, float width,
-			float area, String description) {
+			String address, String title, String cover, String nameOfOwner, String email, int numoffloor, int direction,
+			int type, float height, float width, float area, String description) {
 		super();
 		this.id = id;
 		this.price = price;
@@ -213,6 +230,9 @@ public class Pending implements Serializable  {
 		this.numofbedroom = numofbedroom;
 		this.numofbathroom = numofbathroom;
 		this.phone = phone;
+		this.address = address;
+		this.title = title;
+		this.cover = cover;
 		this.nameOfOwner = nameOfOwner;
 		this.email = email;
 		this.numoffloor = numoffloor;
@@ -224,9 +244,9 @@ public class Pending implements Serializable  {
 		this.description = description;
 	}
 
-	public Pending(int price, int form, int license, int numofbedroom, int numofbathroom, String phone,
-			String nameOfOwner, String email, int numoffloor, int direction, int type, float height, float width,
-			float area, String description) {
+	public Pending(int price, int form, int license, int numofbedroom, int numofbathroom, String phone, String address,
+			String title, String cover, String nameOfOwner, String email, int numoffloor, int direction, int type,
+			float height, float width, float area, String description) {
 		super();
 		this.price = price;
 		this.form = form;
@@ -234,6 +254,9 @@ public class Pending implements Serializable  {
 		this.numofbedroom = numofbedroom;
 		this.numofbathroom = numofbathroom;
 		this.phone = phone;
+		this.address = address;
+		this.title = title;
+		this.cover = cover;
 		this.nameOfOwner = nameOfOwner;
 		this.email = email;
 		this.numoffloor = numoffloor;
@@ -244,6 +267,10 @@ public class Pending implements Serializable  {
 		this.area = area;
 		this.description = description;
 	}
+
+
+
+	
 
 
 
