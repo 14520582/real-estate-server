@@ -78,7 +78,10 @@ public class Pending implements Serializable  {
 	@Lob 
 	@Column(name="description",length = 100000)
     private String description;
-
+	
+	@Column(name="datecreated")
+    private long datecreated;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -89,6 +92,30 @@ public class Pending implements Serializable  {
 
 	public int getPrice() {
 		return price;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getCover() {
+		return cover;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+
+	public long getDatecreated() {
+		return datecreated;
+	}
+
+	public void setDatecreated(long datecreated) {
+		this.datecreated = datecreated;
 	}
 
 	public void setPrice(int price) {
@@ -221,7 +248,7 @@ public class Pending implements Serializable  {
 
 	public Pending(Integer id, int price, int form, int license, int numofbedroom, int numofbathroom, String phone,
 			String address, String title, String cover, String nameOfOwner, String email, int numoffloor, int direction,
-			int type, float height, float width, float area, String description) {
+			int type, float height, float width, float area, String description, long datecreated) {
 		super();
 		this.id = id;
 		this.price = price;
@@ -242,11 +269,12 @@ public class Pending implements Serializable  {
 		this.width = width;
 		this.area = area;
 		this.description = description;
+		this.datecreated = datecreated;
 	}
 
 	public Pending(int price, int form, int license, int numofbedroom, int numofbathroom, String phone, String address,
 			String title, String cover, String nameOfOwner, String email, int numoffloor, int direction, int type,
-			float height, float width, float area, String description) {
+			float height, float width, float area, String description, long datecreated) {
 		super();
 		this.price = price;
 		this.form = form;
@@ -266,6 +294,7 @@ public class Pending implements Serializable  {
 		this.width = width;
 		this.area = area;
 		this.description = description;
+		this.datecreated = datecreated;
 	}
 
 

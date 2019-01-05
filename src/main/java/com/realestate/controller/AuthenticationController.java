@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@CrossOrigin
+@RequestMapping("/account")
 public class AuthenticationController {
 
     @Autowired
@@ -55,7 +55,7 @@ public class AuthenticationController {
         return new ResponseEntity<Account>(user, HttpStatus.OK);
     }
     
-	@RequestMapping(value="/account/register",method = RequestMethod.POST)
+	@RequestMapping(value="/register",method = RequestMethod.POST)
 	public ResponseEntity<Void> addAccount(@RequestBody Account account, UriComponentsBuilder builder) {
 		account.setRole("ROLE_USER");
 		account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
@@ -67,20 +67,15 @@ public class AuthenticationController {
         headers.setLocation(builder.path("/account/{id}").buildAndExpand(account.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
-	@RequestMapping(value="/account/update", method = RequestMethod.PUT )
+	@RequestMapping(value="/update", method = RequestMethod.PUT )
 	public Account updateAccount(@RequestHeader("Token") String token, @RequestBody Account acc) {
 		String username = jwtTokenUtil.getUsernameFromToken(token);
 		if(username.equals(acc.getUsername())){
-			Account user = userService.getAccountById(acc.getId());
-			user.setAddress(acc.getAddress());
-			user.setName(acc.getName());
-			user.setPhone(acc.getPhone());
-			user.setEmail(acc.getEmail());
-			return userService.updateAccount(user);
+			return userService.updateAccount(acc);
 		}else
 			return null;
 	}
-	@RequestMapping(value="/account/changepassword", method = RequestMethod.PUT )
+	@RequestMapping(value="/changepassword", method = RequestMethod.PUT )
 	public Account updatePassword(@RequestHeader("Token") String token,@RequestParam("id") int id, @RequestParam("oldpassword") String oldpassword, @RequestParam("newpassword") String newpassword) {
 		String username = jwtTokenUtil.getUsernameFromToken(token);
 		Account user = userService.getAccountById(id);
