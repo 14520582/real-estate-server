@@ -38,6 +38,9 @@ public class District implements Serializable {
 	@Column(name="name")
     private String name;
 	
+	@Column(name="searchname")
+    private String searchname;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_city", nullable = false)
 	private City city;
@@ -68,6 +71,12 @@ public class District implements Serializable {
 		super();
 	}
 	
+	public String getSearchname() {
+		return searchname;
+	}
+	public void setSearchname(String searchname) {
+		this.searchname = searchname;
+	}
 	public District(Integer id, String name){
 		super();
 		this.id = id;
@@ -81,6 +90,21 @@ public class District implements Serializable {
 		this.city = city;
 	}
 
+	public District(Integer id, String name, String searchname, City city, List<Ward> wards) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.searchname = searchname;
+		this.city = city;
+		this.wards = wards;
+	}
+	public District(String name, String searchname, City city, List<Ward> wards) {
+		super();
+		this.name = name;
+		this.searchname = searchname;
+		this.city = city;
+		this.wards = wards;
+	}
 	public District(String name){
 		super();
 		this.name = name;
